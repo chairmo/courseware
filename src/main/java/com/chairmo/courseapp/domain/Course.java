@@ -43,11 +43,11 @@ public class Course {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offers_id", nullable = false)
-    private Student offers;
+    private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lectures_id", nullable = false)
-    private Lecturer lectures;
+    private Lecturer lecturer;
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dateCreated;

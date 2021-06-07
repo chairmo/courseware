@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: . #use image built from dockerfile in the current working directory
+      dockerfile: Dockerfile
+    restart: always 
+    ports:
+      - 9090:9090  
+    depends_on:
+      db: #the database service should first be started before the app
+        condition: service_healthy
+    secrets:
+      - db-password
+    environment:
+      MYSQL_HOST: db
+    networks:
+      - backend      
+      
+  db:
+    environment:
+      MYSQL_DATABASE: courseapp
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db-password
+    image: mysql:8.0.24
+    restart: always
+    ports:
+      - 3307:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 3s
+      retries: 3
+      start_period: 30s
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./my.cnf:/var/lib/mysql/my.cnf
+    networks:
+      - backend
+
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: password.txt
+networks:
+  backend: 

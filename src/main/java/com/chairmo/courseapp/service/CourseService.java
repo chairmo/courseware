@@ -65,8 +65,8 @@ public class CourseService {
         courseDTO.setCourseCode(course.getCourseCode());
         courseDTO.setCourseUnit(course.getCourseUnit());
         courseDTO.setOptions(course.getOptions());
-        courseDTO.setOffers(course.getOffers() == null ? null : course.getOffers().getId());
-        courseDTO.setLectures(course.getLectures() == null ? null : course.getLectures().getId());
+        courseDTO.setStudent(course.getStudent() == null ? null : course.getStudent().getId());
+        courseDTO.setLecturer(course.getLecturer() == null ? null : course.getLecturer().getId());
         return courseDTO;
     }
 
@@ -75,15 +75,15 @@ public class CourseService {
         course.setCourseCode(courseDTO.getCourseCode());
         course.setCourseUnit(courseDTO.getCourseUnit());
         course.setOptions(courseDTO.getOptions());
-        if (courseDTO.getOffers() != null && (course.getOffers() == null || !course.getOffers().getId().equals(courseDTO.getOffers()))) {
-            final Student offers = studentRepository.findById(courseDTO.getOffers())
+        if (courseDTO.getStudent() != null && (course.getStudent() == null || !course.getStudent().getId().equals(courseDTO.getStudent()))) {
+            final Student student = studentRepository.findById(courseDTO.getStudent())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "offers not found"));
-            course.setOffers(offers);
+            course.setStudent(student);
         }
-        if (courseDTO.getLectures() != null && (course.getLectures() == null || !course.getLectures().getId().equals(courseDTO.getLectures()))) {
-            final Lecturer lectures = lecturerRepository.findById(courseDTO.getLectures())
+        if (courseDTO.getLecturer() != null && (course.getLecturer() == null || !course.getLecturer().getId().equals(courseDTO.getLecturer()))) {
+            final Lecturer lecturer = lecturerRepository.findById(courseDTO.getLecturer())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "lectures not found"));
-            course.setLectures(lectures);
+            course.setLecturer(lecturer);
         }
         return course;
     }

@@ -24,9 +24,9 @@ public class CourseDTO {
     private Options options;
 
     @NotNull
-    private Long lectures;
+    private Long lecturer;
 
     @NotNull
-    private Long offers;
+    private Long student;
 
 }

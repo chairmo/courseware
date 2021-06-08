@@ -34,8 +34,8 @@ public class Lecturer {
     @Type(type = "json")
     private Person details;
 
-    @OneToMany(mappedBy = "lectures")
-    private Set<Course> lecturesCourses;
+    @OneToMany(mappedBy = "lecturer")
+    private Set<Course> courseLecturer;
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dateCreated;

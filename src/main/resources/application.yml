@@ -1,9 +1,8 @@
 server:
-  port: 9090
-  address: 0.0.0.0
+  port: ${PORT:9090}
 spring:
   datasource:
-    url: ${CLEARDB_DATABASE_URL:jdbc:mysql://${MYSQL_HOST:db}:3306/courseapp?serverTimezone=UTC}
+    url: ${CLEARDB_DATABASE_URL:jdbc:mysql://db:3306/courseapp?serverTimezone=UTC}
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:chairmo}
   dbcp2:

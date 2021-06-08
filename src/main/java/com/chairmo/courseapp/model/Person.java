@@ -2,6 +2,7 @@ package com.chairmo.courseapp.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -22,6 +23,7 @@ public class Person {
     @Size(max = 255)
     private String lastName;
 
+    @Column(unique = true)
     @Size(max = 255)
     @Email
     private String email;

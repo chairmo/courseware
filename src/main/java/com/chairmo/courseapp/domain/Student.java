@@ -41,8 +41,8 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Stage level;
 
-    @OneToMany(mappedBy = "offers")
-    private Set<Course> offersCourses;
+    @OneToMany(mappedBy = "student")
+    private Set<Course> courses;
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dateCreated;

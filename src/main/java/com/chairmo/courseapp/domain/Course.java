@@ -42,11 +42,11 @@ public class Course {
     private Options options;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offers_id", nullable = false)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lectures_id", nullable = false)
+    @JoinColumn(name = "lecturer_id", nullable = false)
     private Lecturer lecturer;
 
     @Column(nullable = false, updatable = false)
